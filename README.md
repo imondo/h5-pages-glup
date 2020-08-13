@@ -9,11 +9,15 @@ npm install --g gulp-cli
 
 npm install or yarn install
 
-npm run start
+npm run dev
 ```
 
-## 生产环境
+## 打包生产环境
+
+- 执行命令
 
 ```
 npm run build or yarn build
 ```
+
+- 输出 `dist` 目录下文件
