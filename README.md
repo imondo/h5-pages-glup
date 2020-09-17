@@ -28,7 +28,7 @@ npm install --g gulp-cli
 
 npm install or yarn install
 
-npm run dev
+npm run dev or yarn dev
 ```
 
 ## 打包生产环境
