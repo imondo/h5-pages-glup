@@ -33,6 +33,10 @@ const folder = {
   img: {
     src: path.resolve(__dirname, 'src/images/**'),
     dest: path.resolve(__dirname, 'dist/images/')
+  },
+  libs: {
+    src: path.resolve(__dirname, 'src/libs/**'),
+    dest: path.resolve(__dirname, 'dist/libs/')
   }
 }
 
@@ -97,6 +101,12 @@ gulp.task('compileImages', done => {
     .pipe(gulp.dest(folder.img.dest));
 })
 
+// 插件处理
+gulp.task('compileLibs', done => {
+  return gulp.src(folder.libs.src) // 主文件
+    .pipe(gulp.dest(folder.libs.dest));
+})
+
 // font任务，复制字体到 dist
 gulp.task('font', function() {
   return gulp.src("src/fonts/*")
@@ -111,9 +121,9 @@ gulp.task('fontspider', function() {
     .pipe(fontSpider());
 });
 
-gulp.task('dev', gulp.series('compileImages', 'compileLess', 'compileHtml', 'compileJs'))
+gulp.task('dev', gulp.series('compileImages', 'compileLibs', 'compileLess', 'compileHtml', 'compileJs'))
 
-gulp.task('build', gulp.series('compileImages', 'buildCompileCss', 'compileHtml', 'buildCompileJs'))
+gulp.task('build', gulp.series('compileImages', 'compileLibs', 'buildCompileCss', 'compileHtml', 'buildCompileJs'))
 
 // watch 文件
 gulp.task('watcher', done => {
@@ -126,6 +136,8 @@ gulp.task('watcher', done => {
   watch([folder.js.src], gulp.series('compileJs'));
 
   watch([folder.img.src], gulp.series('compileImages'));
+
+  watch([folder.libs.src], gulp.series('compileLibs'));
   done();
 })
 
